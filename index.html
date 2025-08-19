@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Cycle Alarm Finder</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a0033, #0a0a2e, #00111a);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Star animation */
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    label {
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="time"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      outline: none;
+      width: 60%;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin: 5px;
+    }
+
+    button:hover {
+      background: #ffdd33;
+      transform: scale(1.05);
+    }
+
+    .results {
+      margin-top: 25px;
+      text-align: left;
+    }
+
+    .results h2 {
+      margin-bottom: 10px;
+    }
+
+    .time-card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 12px;
+      border-radius: 10px;
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      margin-top: 15px;
+      opacity: 0.7;
+    }
+
+    .tip, .quote, .challenge {
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      border-radius: 12px;
+      font-style: italic;
+    }
+
+    .quality {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .mood-tracker {
+      margin-top: 25px;
+    }
+
+    .mood-tracker h3 {
+      margin-bottom: 10px;
+    }
+
+    .mood-tracker button {
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Starry background -->
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <h1>🌙 Sleep Cycle Alarm Finder</h1>
+    <p>Plan your sleep & wake up refreshed with natural sleep cycles.</p>
+
+    <label for="bedtime">Choose your bedtime:</label>
+    <input type="time" id="bedtime">
+    <br>
+    <button onclick="calculateCycles()">Find Wake-Up Times</button>
+    <button onclick="calculateNap()">Quick Nap</button>
+
+    <div id="results" class="results"></div>
+    <div id="quote" class="quote"></div>
+    <div id="challenge" class="challenge"></div>
+
+    <div class="mood-tracker">
+      <h3>How do you feel this morning?</h3>
+      <button onclick="trackMood('😀 Energetic')">😀</button>
+      <button onclick="trackMood('🙂 Okay')">🙂</button>
+      <button onclick="trackMood('😴 Tired')">😴</button>
+      <p id="mood-result"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
